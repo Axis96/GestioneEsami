@@ -1,0 +1,88 @@
+package it.dstech.model;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+public class Studente {
+	
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column(name = "user_id")
+	private Long matricola;
+	
+	private String password;
+	private String username;
+	private Boolean active;
+	
+	@ManyToMany(cascade = CascadeType.MERGE)
+    private Set<Ruolo> ruolo;
+	
+	
+	
+	@ManyToMany
+	List<Esame> storicoEsami= new ArrayList<Esame>();
+	@ManyToMany
+	List<Esame> listaEsamiPrenotati = new ArrayList<Esame>();
+	@ManyToMany
+	List<Esame> listaEsamiSostenibili = new ArrayList<Esame>();
+	public Long getMatricola() {
+		return matricola;
+	}
+	public void setMatricola(Long matricola) {
+		this.matricola = matricola;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public Set<Ruolo> getRuolo() {
+		return ruolo;
+	}
+	public void setRuolo(Set<Ruolo> ruolo) {
+		this.ruolo = ruolo;
+	}
+	public List<Esame> getStoricoEsami() {
+		return storicoEsami;
+	}
+	public void setStoricoEsami(List<Esame> storicoEsami) {
+		this.storicoEsami = storicoEsami;
+	}
+	public List<Esame> getListaEsamiPrenotati() {
+		return listaEsamiPrenotati;
+	}
+	public void setListaEsamiPrenotati(List<Esame> listaEsamiPrenotati) {
+		this.listaEsamiPrenotati = listaEsamiPrenotati;
+	}
+	public List<Esame> getListaEsamiSostenibili() {
+		return listaEsamiSostenibili;
+	}
+	public void setListaEsamiSostenibili(List<Esame> listaEsamiSostenibili) {
+		this.listaEsamiSostenibili = listaEsamiSostenibili;
+	}
+	
+	
+}
