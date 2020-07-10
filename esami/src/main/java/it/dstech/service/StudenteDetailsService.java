@@ -22,6 +22,8 @@ public class StudenteDetailsService implements UserDetailsService {
     @Autowired
     private StudenteService studenteService;
 
+    @Override
+    @Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		 Studente studente = studenteService.findUserByUsername(username);
 	        List<GrantedAuthority> authorities = getUserAuthority(studente.getRuolo());
