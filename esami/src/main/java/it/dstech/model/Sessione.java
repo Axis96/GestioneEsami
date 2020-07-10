@@ -12,6 +12,6 @@ public class Sessione {
 	private Timestamp dataFine;
 	
 	@ManyToMany
-	List<Esame> esamiPrenotabili= new ArrayList<Esame>();
+	private List<Esame> esamiPrenotabili;
 	
 }

@@ -2,20 +2,14 @@ package it.dstech.controller;
 
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import it.dstech.model.Docente;
 import it.dstech.model.Studente;
 import it.dstech.service.DocenteService;
-import it.dstech.service.EsameService;
 import it.dstech.service.StudenteService;
 
 @Controller

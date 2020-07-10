@@ -1,6 +1,6 @@
 package it.dstech.model;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -16,7 +16,7 @@ public class Docente {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "docente_id")
 	private Long matricola;
 	
 	private String username;
@@ -27,7 +27,7 @@ public class Docente {
     private Set<Ruolo> ruolo;
 	
 	@ManyToMany
-	List<Esame> listaEsami = new ArrayList<Esame>();
+	private List<Esame> listaEsami;
 	
 
 	public Long getMatricola() {
