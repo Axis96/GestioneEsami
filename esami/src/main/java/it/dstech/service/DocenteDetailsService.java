@@ -29,11 +29,11 @@ public class DocenteDetailsService implements UserDetailsService {
 
 
     private List<GrantedAuthority> getUserAuthority(Set<Ruolo> userRoles) {
-        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> roles = new HashSet<>();
         for (Ruolo role : userRoles) {
             roles.add(new SimpleGrantedAuthority(role.getRuolo()));
         }
-        return new ArrayList<GrantedAuthority>(roles);
+        return new ArrayList<>(roles);
     }
 
     private UserDetails buildUserForAuthentication(Docente docente, List<GrantedAuthority> authorities) {

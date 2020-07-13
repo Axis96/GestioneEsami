@@ -50,9 +50,14 @@ public class RegistrazioneController {
 			modelAndView.setViewName("registrazione");
 		} else {
 			docenteService.save(docente);
-			
+			modelAndView.addObject("successMessage", "Docente registrato con successo!");
 		}
-		return registrazione();
+		Docente docente2 = new Docente();
+		Studente studente = new Studente();
+		modelAndView.addObject("docente", docente2);
+		modelAndView.addObject("studente", studente);
+		modelAndView.setViewName("registrazione");
+		return modelAndView;
 	}
 
 	@PostMapping(value = "/registrazioneStudente")
@@ -66,11 +71,13 @@ public class RegistrazioneController {
 			modelAndView.setViewName("registrazione");
 		} else {
 			studenteService.save(studente);
-			modelAndView.addObject("successMessage", "Utente registrato con successo!");
-			modelAndView.addObject("studente", new Studente());
-			modelAndView.setViewName("registrazione");
+			modelAndView.addObject("successMessage2", "Studente registrato con successo!");
 		}
+		Docente docente2 = new Docente();
+		Studente studente2 = new Studente();
+		modelAndView.addObject("docente", docente2);
+		modelAndView.addObject("studente", studente2);
+		modelAndView.setViewName("registrazione");
 		return modelAndView;
 	}
-
 }

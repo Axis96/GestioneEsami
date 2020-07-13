@@ -1,27 +1,26 @@
 package it.dstech.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 public class Ruolo {
-	
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    @Column(name = "ruolo_id")
 	    private int id;
-	 	
-	 	
-	 	
 	    @Column(name = "ruolo")
 	    private String ruolo;
-	    
-	    
-		public int getId() {
+
+	    public int getId() {
 			return id;
 		}
 		public void setId(int id) {
@@ -33,6 +32,5 @@ public class Ruolo {
 		public void setRuolo(String ruolo) {
 			this.ruolo = ruolo;
 		}
-
 
 }

@@ -33,7 +33,6 @@ import it.dstech.service.StudenteDetailsService;
 	                auth
 	                    .userDetailsService(studenteDetailsService)
 	                    .passwordEncoder(bCryptPasswordEncoder);
-	                
 	                auth
                     .userDetailsService(docenteDetailsService)
                     .passwordEncoder(bCryptPasswordEncoder);
@@ -50,10 +49,8 @@ import it.dstech.service.StudenteDetailsService;
 	                .antMatchers("/").permitAll()
 	                .antMatchers(loginPage).permitAll()
 	                .antMatchers("/registrazione","/registrazioneStudente","/registrazioneDocente").permitAll()
-					/*
-					 * .antMatchers("/registrazioneStudente").permitAll()
-					 * .antMatchers("/registrazioneDocente").permitAll()
-					 */
+	                .antMatchers("/registrazioneStudente").permitAll()
+					.antMatchers("/registrazioneDocente").permitAll()
 	                .antMatchers("/studente/**").hasAuthority("STUDENTE")
 	                .antMatchers("/docente/**").hasAuthority("DOCENTE")
 	                .anyRequest()

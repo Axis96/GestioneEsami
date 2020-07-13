@@ -38,9 +38,9 @@ public class StudenteDetailsService implements UserDetailsService {
        return new ArrayList<GrantedAuthority>(roles);
    }
 
-   private UserDetails buildUserForAuthentication(Studente docente, List<GrantedAuthority> authorities) {
-       return new org.springframework.security.core.userdetails.User(docente.getUsername(), docente.getPassword(),
-               docente.getActive(), true, true, true, authorities);
+   private UserDetails buildUserForAuthentication(Studente studente, List<GrantedAuthority> authorities) {
+       return new org.springframework.security.core.userdetails.User(studente.getUsername(), studente.getPassword(),
+               studente.getActive(), true, true, true, authorities);
    }
 
 

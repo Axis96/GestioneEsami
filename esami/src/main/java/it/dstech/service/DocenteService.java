@@ -32,7 +32,7 @@ public class DocenteService {
 	        docente.setPassword(bCryptPasswordEncoder.encode(docente.getPassword()));
 	        docente.setActive(true);
 	       
-	        Ruolo userRole = ruoloRepository.findByRuolo("ADMIN");
+	        Ruolo userRole = ruoloRepository.findByRuolo("DOCENTE");
 	        docente.setRuolo(new HashSet<Ruolo>(Arrays.asList(userRole)));
 	        
 	        return docenteRepository.save(docente);

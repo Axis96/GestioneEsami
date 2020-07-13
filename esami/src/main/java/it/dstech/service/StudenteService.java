@@ -25,17 +25,11 @@ public class StudenteService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	/*
-	 * @Autowired public StudenteService(StudenteRepository studenteRepository,
-	 * RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-	 * this.studenteRepository = studenteRepository; this.roleRepository =
-	 * roleRepository; this.bCryptPasswordEncoder = bCryptPasswordEncoder; }
-	 */
-	 public Studente save(Studente studente) {
+	public Studente save(Studente studente) {
 	        studente.setPassword(bCryptPasswordEncoder.encode(studente.getPassword()));
 	        studente.setActive(true);
 	       
-	        Ruolo userRole = ruoloRepository.findByRuolo("ADMIN");
+	        Ruolo userRole = ruoloRepository.findByRuolo("STUDENTE");
 	        studente.setRuolo(new HashSet<Ruolo>(Arrays.asList(userRole)));
 	        
 	        return studenteRepository.save(studente);
