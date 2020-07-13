@@ -28,7 +28,7 @@ public class RegistrazioneController {
 	}
 
 	@GetMapping(value = "/registrazione")
-	public ModelAndView registrazione(String azione) {
+	public ModelAndView registrazione() {
 		ModelAndView modelAndView = new ModelAndView();
 		Docente docente = new Docente();
 		Studente studente = new Studente();
@@ -50,11 +50,9 @@ public class RegistrazioneController {
 			modelAndView.setViewName("registrazione");
 		} else {
 			docenteService.save(docente);
-			modelAndView.addObject("successMessage", "Utente registrato con successo!");
-			modelAndView.addObject("docente", new Docente());
-			modelAndView.setViewName("registrazione");
+			
 		}
-		return modelAndView;
+		return registrazione();
 	}
 
 	@PostMapping(value = "/registrazioneStudente")

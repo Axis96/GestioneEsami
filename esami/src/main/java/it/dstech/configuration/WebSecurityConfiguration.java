@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import it.dstech.service.DocenteDetailsService;
 import it.dstech.service.StudenteDetailsService;
 
 @Configuration
@@ -20,15 +21,22 @@ import it.dstech.service.StudenteDetailsService;
 	    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	    @Autowired
-	    private StudenteDetailsService userDetailsService;
+	    private StudenteDetailsService studenteDetailsService;
+	    
+	    @Autowired
+	    private DocenteDetailsService docenteDetailsService;
 
 
 
 	    @Override
 	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	                auth
-	                    .userDetailsService(userDetailsService)
+	                    .userDetailsService(studenteDetailsService)
 	                    .passwordEncoder(bCryptPasswordEncoder);
+	                
+	                auth
+                    .userDetailsService(docenteDetailsService)
+                    .passwordEncoder(bCryptPasswordEncoder);
 	    }
 
 	    @Override
@@ -41,8 +49,13 @@ import it.dstech.service.StudenteDetailsService;
 	                authorizeRequests()
 	                .antMatchers("/").permitAll()
 	                .antMatchers(loginPage).permitAll()
-	                .antMatchers("/registrazione").permitAll()
-	                .antMatchers("/admin/**").hasAuthority("ADMIN")
+	                .antMatchers("/registrazione","/registrazioneStudente","/registrazioneDocente").permitAll()
+					/*
+					 * .antMatchers("/registrazioneStudente").permitAll()
+					 * .antMatchers("/registrazioneDocente").permitAll()
+					 */
+	                .antMatchers("/studente/**").hasAuthority("STUDENTE")
+	                .antMatchers("/docente/**").hasAuthority("DOCENTE")
 	                .anyRequest()
 	                .authenticated()
 	                .and().csrf().disable()
@@ -50,7 +63,8 @@ import it.dstech.service.StudenteDetailsService;
 	                .loginPage(loginPage)
 	                .loginPage("/")
 	                .failureUrl("/login?error=true")
-	                .defaultSuccessUrl("/admin/home")
+	                .defaultSuccessUrl("/studente/home")
+	                .defaultSuccessUrl("/docente/home")
 	                .usernameParameter("username")
 	                .passwordParameter("password")
 	                .and().logout()
