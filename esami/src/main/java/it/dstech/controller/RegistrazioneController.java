@@ -57,7 +57,7 @@ public class RegistrazioneController {
 		return modelAndView;
 	}
 
-	@PostMapping(value = "/registrazioneDocente")
+	@PostMapping(value = "/registrazioneStudente")
 	public ModelAndView registrazioneStudente(@Valid Studente studente, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		Studente userExists = studenteService.findUserByUsername(studente.getUsername());

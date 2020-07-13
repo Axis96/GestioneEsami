@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Docente {
@@ -26,7 +27,7 @@ public class Docente {
 	@ManyToMany(cascade = CascadeType.MERGE)
     private Set<Ruolo> ruolo;
 	
-	@ManyToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Esame> listaEsami;
 	
 

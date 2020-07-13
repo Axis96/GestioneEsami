@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Studente {
@@ -27,12 +28,9 @@ public class Studente {
 	
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Esame> storicoEsami;
-	@ManyToMany
-	private List<Esame> listaEsamiPrenotati;
-	@ManyToMany
-	private List<Esame> listaEsamiSostenibili;
+	
 	
 	
 	public Long getMatricola() {
@@ -70,18 +68,6 @@ public class Studente {
 	}
 	public void setStoricoEsami(List<Esame> storicoEsami) {
 		this.storicoEsami = storicoEsami;
-	}
-	public List<Esame> getListaEsamiPrenotati() {
-		return listaEsamiPrenotati;
-	}
-	public void setListaEsamiPrenotati(List<Esame> listaEsamiPrenotati) {
-		this.listaEsamiPrenotati = listaEsamiPrenotati;
-	}
-	public List<Esame> getListaEsamiSostenibili() {
-		return listaEsamiSostenibili;
-	}
-	public void setListaEsamiSostenibili(List<Esame> listaEsamiSostenibili) {
-		this.listaEsamiSostenibili = listaEsamiSostenibili;
 	}
 	
 	

@@ -2,12 +2,16 @@ package it.dstech.model;
 
 import java.security.Timestamp;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 
@@ -21,17 +25,19 @@ public class Esame {
 	
 	private String nome;
 	
-	@ManyToMany
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Docente docente;
 	
-	private Studente studente;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Studente> studenti;
 	
 	private Timestamp data;
 	private int voto;
 	
-	@ManyToMany
-	private Sessione sessione;
-	
+	/*
+	 * @ManyToMany(cascade = CascadeType.MERGE) private Sessione sessione;
+	 */
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Studente> listaStudentiPrenotati;
 	
 	
@@ -61,12 +67,14 @@ public class Esame {
 		this.docente = docente;
 	}
 
-	public Studente getStudente() {
-		return studente;
+	
+
+	public List<Studente> getStudenti() {
+		return studenti;
 	}
 
-	public void setStudente(Studente studente) {
-		this.studente = studente;
+	public void setStudenti(List<Studente> studenti) {
+		this.studenti = studenti;
 	}
 
 	public Timestamp getData() {
@@ -85,13 +93,11 @@ public class Esame {
 		this.voto = voto;
 	}
 
-	public Sessione getSessione() {
-		return sessione;
-	}
-
-	public void setSessione(Sessione sessione) {
-		this.sessione = sessione;
-	}
+	/*
+	 * public Sessione getSessione() { return sessione; }
+	 * 
+	 * public void setSessione(Sessione sessione) { this.sessione = sessione; }
+	 */
 
 	public List<Studente> getListaStudentiPrenotati() {
 		return listaStudentiPrenotati;

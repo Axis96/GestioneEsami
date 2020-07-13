@@ -1,26 +1,46 @@
 package it.dstech.service;
 
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import it.dstech.model.Studente;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import it.dstech.repository.RuoloRepository;
+import it.dstech.model.Ruolo;
 import it.dstech.model.Studente;
 import it.dstech.repository.StudenteRepository;
 
+
 @Service
-@Transactional
 public class StudenteService {
 	
 	@Autowired
-	StudenteRepository studenteRepository;
+	private StudenteRepository studenteRepository;
+	@Autowired
+	private RuoloRepository ruoloRepository;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	/*
+	 * @Autowired public StudenteService(StudenteRepository studenteRepository,
+	 * RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+	 * this.studenteRepository = studenteRepository; this.roleRepository =
+	 * roleRepository; this.bCryptPasswordEncoder = bCryptPasswordEncoder; }
+	 */
+	 public Studente save(Studente studente) {
+	        studente.setPassword(bCryptPasswordEncoder.encode(studente.getPassword()));
+	        studente.setActive(true);
+	       
+	        Ruolo userRole = ruoloRepository.findByRuolo("ADMIN");
+	        studente.setRuolo(new HashSet<Ruolo>(Arrays.asList(userRole)));
+	        
+	        return studenteRepository.save(studente);
+	    }
 	
-	public void save(Studente studente) {
-		studenteRepository.save(studente);
-	}
 	
 	public Studente get(Long id) {
 		return studenteRepository.findById(id).get();
