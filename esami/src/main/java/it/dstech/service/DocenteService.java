@@ -1,5 +1,6 @@
 package it.dstech.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import it.dstech.model.Docente;
+import it.dstech.model.Esame;
 import it.dstech.model.Ruolo;
 import it.dstech.repository.DocenteRepository;
 import it.dstech.repository.RuoloRepository;

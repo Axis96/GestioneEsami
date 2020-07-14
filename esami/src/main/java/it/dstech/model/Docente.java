@@ -22,7 +22,6 @@ public class Docente {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name = "docente_id")
 	private Long matricola;
-	
 	private String username;
 	private String password;
 	private Boolean active;
@@ -82,5 +81,12 @@ public class Docente {
 	public void setListaEsami(List<Esame> listaEsami) {
 		this.listaEsami = listaEsami;
 	}
+
+	@Override
+	public String toString() {
+		return "Docente [matricola=" + matricola + ", username=" + username + ", password=" + password + ", active="
+				+ active + ", ruolo=" + ruolo + ", listaEsami=" + listaEsami + "]";
+	}
+	
 	
 }

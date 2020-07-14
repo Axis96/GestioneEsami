@@ -1,6 +1,6 @@
 package it.dstech.model;
 
-import java.security.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+import org.springframework.lang.Nullable;
 
 
 
@@ -24,25 +25,16 @@ public class Esame {
 	private Long id;
 	
 	private String nome;
-	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Docente docente;
-	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Studente> studenti;
-	
-	private Timestamp data;
+	private LocalDate data;
+	@Column(nullable = true)
 	private int voto;
-	
-	/*
-	 * @ManyToMany(cascade = CascadeType.MERGE) private Sessione sessione;
-	 */
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Studente> listaStudentiPrenotati;
 	
-	
-	
-
 	public Long getId() {
 		return id;
 	}
@@ -67,8 +59,6 @@ public class Esame {
 		this.docente = docente;
 	}
 
-	
-
 	public List<Studente> getStudenti() {
 		return studenti;
 	}
@@ -77,11 +67,12 @@ public class Esame {
 		this.studenti = studenti;
 	}
 
-	public Timestamp getData() {
+	
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Timestamp data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -92,12 +83,6 @@ public class Esame {
 	public void setVoto(int voto) {
 		this.voto = voto;
 	}
-
-	/*
-	 * public Sessione getSessione() { return sessione; }
-	 * 
-	 * public void setSessione(Sessione sessione) { this.sessione = sessione; }
-	 */
 
 	public List<Studente> getListaStudentiPrenotati() {
 		return listaStudentiPrenotati;

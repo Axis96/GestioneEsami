@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Homepage Docente</title>
+</head>
+<body>
+	<br>
+	<h1 style="text-align: center">Docente Home</h1>
+	<table class="table table-striped table-responsive-md">
+		<thead>
+			<tr>
+				<th>Matricola</th>
+				<th>Username</th>
+				<th>Voto</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="studente : ${listaStudenti}" th:each="voto : ${listaVoti}">
+				<td th:text="${studente.matricola}"></td>
+				<td th:text="${studente.username}"></td>
+				<td th:text="${voto}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
