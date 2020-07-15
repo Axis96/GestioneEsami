@@ -33,7 +33,7 @@ public class StudenteController {
 		studente.getStoricoEsami().add(esame);
 		studenteService.save(studente);
 		esamiService.save(esame);
-		modelAndView.addObject("listaEsami", esamiService.listaEsamiDaPrenotare(studente.getMatricola()));
+		modelAndView.addObject("listaEsami", esamiService.listaEsami());
 		modelAndView.setViewName("studente/home");
 		return modelAndView;
 	}

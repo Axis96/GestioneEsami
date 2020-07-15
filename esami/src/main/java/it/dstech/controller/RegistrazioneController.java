@@ -104,8 +104,8 @@ public class RegistrazioneController {
 		Studente studente = studenteService.findUserByUsername(auth.getName());
 		modelAndView.addObject("username", "Welcome " + studente.getUsername());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("studente/home");
 		modelAndView.addObject("listaEsami", esameService.listaEsamiDaPrenotare(studente.getMatricola()));
+		modelAndView.setViewName("studente/home");
 		return modelAndView;
 	}
 	

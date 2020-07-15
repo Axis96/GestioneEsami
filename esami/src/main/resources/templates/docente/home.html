@@ -16,9 +16,9 @@
 <body>
 	<br>
 	<h1 style="text-align: center">Docente Home</h1>
-	
 	<form action="#" th:action="@{/docente/creaEsame}" th:object="${esame}" method="post">
-<input type="text" th:field="*{nome}"  placeholder="Titolo">
+<input type="text" th:field="*{nome}"  placeholder="Titolo" required="required">
+<input type="date" th:field="*{data}" required="required"> 
 <input type="hidden" th:value="${matricola}" name="matricola" />
 <input type="submit" name="azione" value="Crea">
 </form>
@@ -38,7 +38,7 @@
 				<td th:text="${esame.data}"></td>
 				<td><form action="#" th:action="@{/docente/dettagli}" class="col-lg-6 offset-lg-3 ">
 						<input type="hidden" th:value="${esame.id}" name="idEsame" /> <input
-							type="submit" value="Vedi Studenti" class="btn btn-primary">
+							type="submit" value="Studenti Prenotati" class="btn btn-primary">
 					</form></td>
 			</tr>
 		</tbody>

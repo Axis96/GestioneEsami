@@ -14,35 +14,44 @@ import it.dstech.repository.EsameRepository;
 public class EsameService {
 
 	@Autowired
-	EsameRepository esameRepository;
+	private EsameRepository esameRepository;
 
 	public void save(Esame esame) {
 		esameRepository.save(esame);
 	}
-
 	public Esame get(Long id) {
 		return esameRepository.findById(id).get();
 	}
-
 	public void delete(Long id) {
 		esameRepository.deleteById(id);
 	}
-
 	public List<Esame> listaEsami() {
 		return (List<Esame>) esameRepository.findAll();
 	}
-
+	public String reversedDateFormat(Esame esame) {
+		String anno = esame.getData().substring(0, 4);
+		String mese = esame.getData().substring(5, 7);
+		String giorno = esame.getData().substring(8, 10);
+		String data = giorno + "-" + mese + "-" + anno;
+		return data;
+	}
 	public List<Esame> listaEsamiDaPrenotare(Long matricola) {
-		List<Esame> listaEsami = new ArrayList<Esame>();
+		List<Esame> lista = new ArrayList<Esame>();
 		for (Esame esame : listaEsami()) {
 			for (Studente studente : esame.getListaStudentiPrenotati()) {
-				if (studente.getMatricola() != matricola) {
-					listaEsami.add(esame);
+				if (studente.getMatricola() != matricola || studente.getMatricola() == null) {
+					lista.add(esame);
 				}
 			}
 		}
-		return listaEsami;
+		return lista;
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

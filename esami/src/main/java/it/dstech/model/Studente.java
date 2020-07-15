@@ -28,7 +28,7 @@ public class Studente {
     @JoinTable(name = "studente_ruolo", joinColumns = @JoinColumn(name = "studente_id"), inverseJoinColumns = @JoinColumn(name = "ruolo_id"))
     private Set<Ruolo> ruolo;
 	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Esame> storicoEsami;
+	private List<Esame> esamiPrenotati;
 	
 	
 	
@@ -63,10 +63,10 @@ public class Studente {
 		this.ruolo = ruolo;
 	}
 	public List<Esame> getStoricoEsami() {
-		return storicoEsami;
+		return esamiPrenotati;
 	}
 	public void setStoricoEsami(List<Esame> storicoEsami) {
-		this.storicoEsami = storicoEsami;
+		this.esamiPrenotati = storicoEsami;
 	}
 	
 	

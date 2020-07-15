@@ -30,11 +30,11 @@
 			<tr th:each="esame : ${listaEsami}">
 				<td th:text="${esame.nome}"></td>
 				<td th:text="${esame.data}"></td>
-				<td th:text="${esame.docente.nome}"></td>
+<!-- 				<td th:text="${esame.docente.nome}"></td> -->
 				<td><form action="#" th:action="@{/studente/prenota}" method="post" class="col-lg-6 offset-lg-3 ">
 					<input type="hidden" th:value="${esame.id}" name="idEsame" />
 					<input type="hidden" th:value="${studente}" name="idStudente" />
-					 <input	type="submit" value="Vedi Studenti" class="btn btn-primary">
+					 <input	type="submit" value="Prenota" class="btn btn-primary">
 					</form></td>
 			</tr>
 		</tbody>

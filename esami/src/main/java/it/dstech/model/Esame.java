@@ -12,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 
@@ -29,7 +32,9 @@ public class Esame {
 	private Docente docente;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Studente> studenti;
-	private LocalDate data;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+	private String data;
 	@Column(nullable = true)
 	private int voto;
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -66,13 +71,11 @@ public class Esame {
 	public void setStudenti(List<Studente> studenti) {
 		this.studenti = studenti;
 	}
-
-	
-	public LocalDate getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
