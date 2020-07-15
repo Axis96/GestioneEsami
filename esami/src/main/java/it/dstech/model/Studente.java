@@ -30,6 +30,10 @@ public class Studente {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Esame> esamiPrenotati;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Esame> esamiPassati;
+
+	
 	
 	
 	public Long getMatricola() {
@@ -62,7 +66,7 @@ public class Studente {
 	public void setRuolo(Set<Ruolo> ruolo) {
 		this.ruolo = ruolo;
 	}
-	public List<Esame> getStoricoEsami() {
+	public List<Esame> getEsamiPrenotati() {
 		return esamiPrenotati;
 	}
 	public void setStoricoEsami(List<Esame> storicoEsami) {

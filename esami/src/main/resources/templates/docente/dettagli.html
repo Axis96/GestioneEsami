@@ -26,10 +26,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="studente : ${listaStudenti}" th:each="voto : ${listaVoti}">
-				<td th:text="${studente.matricola}"></td>
-				<td th:text="${studente.username}"></td>
-				<td th:text="${voto}"></td>
+			<tr th:each="risultato : ${listaRisultati}" >
+				<td th:text="${risultato.matricolaStudente}"></td>
+				<td th:text="${risultato.nomeStudente}"></td>
+				<td th:text="${risultato.voto}"></td>
 			</tr>
 		</tbody>
 	</table>

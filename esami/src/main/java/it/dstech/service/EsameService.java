@@ -28,6 +28,8 @@ public class EsameService {
 	public List<Esame> listaEsami() {
 		return (List<Esame>) esameRepository.findAll();
 	}
+	
+	
 	public String reversedDateFormat(Esame esame) {
 		String anno = esame.getData().substring(0, 4);
 		String mese = esame.getData().substring(5, 7);
@@ -35,23 +37,29 @@ public class EsameService {
 		String data = giorno + "-" + mese + "-" + anno;
 		return data;
 	}
+	
+	public boolean checkEsame(Esame esameDaControllare, Studente studente) {
+		for (Studente studentePrenotato : esameDaControllare.getListaStudentiPrenotati()) {
+			if (studentePrenotato == studente) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public List<Esame> listaEsamiDaPrenotare(Long matricola) {
 		List<Esame> lista = new ArrayList<Esame>();
 		for (Esame esame : listaEsami()) {
-			for (Studente studente : esame.getListaStudentiPrenotati()) {
-				if (studente.getMatricola() != matricola || studente.getMatricola() == null) {
-					lista.add(esame);
+			if (esame.getListaStudentiPrenotati() == null) {
+				lista.add(esame);
+			} else {
+				for (Studente studente : esame.getListaStudentiPrenotati()) {
+					if (studente.getMatricola() != matricola || studente.getMatricola() == null) {
+						lista.add(esame);
+					}
 				}
 			}
 		}
 		return lista;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

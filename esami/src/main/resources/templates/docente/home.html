@@ -38,10 +38,16 @@
 				<td th:text="${esame.data}"></td>
 				<td><form action="#" th:action="@{/docente/dettagli}" class="col-lg-6 offset-lg-3 ">
 						<input type="hidden" th:value="${esame.id}" name="idEsame" /> <input
-							type="submit" value="Studenti Prenotati" class="btn btn-primary">
+							type="submit" value="Elenco Studenti" class="btn btn-primary">
 					</form></td>
 			</tr>
 		</tbody>
 	</table>
+	
+	
+	<form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger" name="registration" type="Submit"> Logout </button>
+    </form>
+    
 </body>
 </html>

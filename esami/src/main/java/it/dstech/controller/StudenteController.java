@@ -29,15 +29,22 @@ public class StudenteController {
 		ModelAndView modelAndView = new ModelAndView();
 		Studente studente = studenteService.get(idStudente);
 		Esame esame = esamiService.get(idEsame);
-		esame.getListaStudentiPrenotati().add(studente);
-		studente.getStoricoEsami().add(esame);
-		studenteService.save(studente);
-		esamiService.save(esame);
+		
+		
+		if (esamiService.checkEsame(esame, studente)) {
+			modelAndView.addObject("messaggio", "L'esame è già stato prenotato");
+		} else {
+			esame.getListaStudentiPrenotati().add(studente);
+			studente.getEsamiPrenotati().add(esame);
+			studenteService.save(studente);
+			esamiService.save(esame);
+		}
+		
+		modelAndView.addObject("idStudente", studente.getMatricola());
 		modelAndView.addObject("listaEsami", esamiService.listaEsami());
 		modelAndView.setViewName("studente/home");
 		return modelAndView;
 	}
 	
-	
-	
+
 }
