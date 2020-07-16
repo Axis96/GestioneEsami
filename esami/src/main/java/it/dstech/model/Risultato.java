@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Risultato {
@@ -17,23 +17,27 @@ public class Risultato {
 	@Column(name = "esame_id")
 	private Long id;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Esame esame;
-	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Studente studente;
-	
-	private Long matricolaStudente;
-	
-	private String nomeStudente;
 	
 	private int voto;
 	
+	private String nomeStudente;
 	
+	private Long matricolaStudente;
+	
+	public Risultato () {
+		
+	}
 	
 	public Risultato(Esame esame, Studente studente) {
 		super();
 		this.esame = esame;
 		this.studente = studente;
 	}
+	
 	
 	public Long getId() {
 		return id;
@@ -64,17 +68,12 @@ public class Risultato {
 		return studente.getMatricola();
 	}
 
-	public void setMatricolaStudente(Long matricolaStudente) {
-		this.matricolaStudente = matricolaStudente;
-	}
+	
 
 	public String getNomeStudente() {
 		return studente.getUsername();
 	}
 
-	public void setNomeStudente(String nomeStudente) {
-		this.nomeStudente = nomeStudente;
-	}
 	
 	
 }

@@ -29,7 +29,22 @@
 			<tr th:each="risultato : ${listaRisultati}" >
 				<td th:text="${risultato.matricolaStudente}"></td>
 				<td th:text="${risultato.nomeStudente}"></td>
-				<td th:text="${risultato.voto}"></td>
+	<td>
+				 <form  action="#" th:action="@{/docente/inserisciVoto}"  method="post">
+				 <input type="hidden" th:value="${idEsame}" name="idEsame" />
+    <input type="hidden" th:value="${matricola}" name="matricola" />
+        <input type="hidden" th:value="${risultato.matricolaStudente}" name="matricolaStud" />
+    
+    <span th:if="${risultato.voto == 0}"><input type="number" name="voto"  min ="1" max="30">
+   <input type="submit" value="Inserisci voto" >
+   </span>
+   </form>
+    <span th:unless="${risultato.voto == 0}" th:text="${risultato.voto}" ></span>
+
+
+</td>				
+			
+				
 			</tr>
 		</tbody>
 	</table>

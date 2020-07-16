@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Studente {
@@ -29,6 +30,8 @@ public class Studente {
     private Set<Ruolo> ruolo;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Esame> esamiPrenotati;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Risultato risultato;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Esame> esamiPassati;

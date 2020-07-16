@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -29,18 +31,37 @@ public class Esame {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Docente docente;
 	
-	private String nomeDocente;
+	
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private String data;
 	
-	@Column(nullable = true)
-	private int voto;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Risultato>listaRisultati;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Studente> listaStudentiPrenotati;
 	
+	private String nomeDocente;
+	
+	
+
+	
+
+	public String getNomeDocente() {
+		return docente.getUsername();
+	}
+
+	
+
+	public List<Risultato> getListaRisultati() {
+		return listaRisultati;
+	}
+
+	public void setListaRisultati(List<Risultato> listaRisultati) {
+		this.listaRisultati = listaRisultati;
+	}
 
 	public Long getId() {
 		return id;
@@ -66,13 +87,7 @@ public class Esame {
 		this.docente = docente;
 	}
 
-	public String getNomeDocente() {
-		return docente.getUsername();
-	}
-
-	public void setNomeDocente(String nomeDocente) {
-		this.nomeDocente = nomeDocente;
-	}
+	
 
 	public String getData() {
 		return data;
@@ -82,13 +97,6 @@ public class Esame {
 		this.data = data;
 	}
 
-	public int getVoto() {
-		return voto;
-	}
-
-	public void setVoto(int voto) {
-		this.voto = voto;
-	}
 
 	public List<Studente> getListaStudentiPrenotati() {
 		return listaStudentiPrenotati;

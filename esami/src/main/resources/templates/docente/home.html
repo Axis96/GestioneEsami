@@ -37,6 +37,7 @@
 				<td th:text="${esame.nome}"></td>
 				<td th:text="${esame.data}"></td>
 				<td><form action="#" th:action="@{/docente/dettagli}" class="col-lg-6 offset-lg-3 ">
+						<input type="hidden" th:value="${matricola}" name="matricola" />
 						<input type="hidden" th:value="${esame.id}" name="idEsame" /> <input
 							type="submit" value="Elenco Studenti" class="btn btn-primary">
 					</form></td>

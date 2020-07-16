@@ -35,4 +35,8 @@ public class RisultatoService {
 		return listaRisultati;
 	}
 	
+	
+	public void save(Risultato risultato) {
+		risultatoRepository.save(risultato);
+	}
 }
