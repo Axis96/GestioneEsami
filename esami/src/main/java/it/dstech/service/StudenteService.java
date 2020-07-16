@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.dstech.repository.RuoloRepository;
+import it.dstech.model.Esame;
+import it.dstech.model.Risultato;
 import it.dstech.model.Ruolo;
 import it.dstech.model.Studente;
 import it.dstech.repository.StudenteRepository;
@@ -50,5 +52,18 @@ public class StudenteService {
 
 	public Studente findUserByUsername(String username) {
 		return studenteRepository.findByUsername(username);
+	}
+	
+	public double mediaVoti(Studente studente) {
+	double tot=0;
+	double cont=0;
+		for(Esame esame :studente.getEsamiPrenotati()) {
+			for(Risultato risultato :esame.getListaRisultati()) {
+			tot+=(double)risultato.getVoto();	
+			System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+risultato.getVoto());
+				cont++;
+			}
+		}
+	return	 tot/cont;
 	}
 }

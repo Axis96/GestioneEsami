@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import it.dstech.model.Esame;
 import it.dstech.model.Risultato;
 import it.dstech.model.Studente;
-import it.dstech.service.DocenteService;
 import it.dstech.service.EsameService;
 import it.dstech.service.RisultatoService;
 import it.dstech.service.StudenteService;
@@ -31,16 +30,16 @@ public class StudenteController {
 		ModelAndView modelAndView = new ModelAndView();
 		Studente studente = studenteService.get(idStudente);
 		Esame esame = esamiService.get(idEsame);
-		
+		modelAndView.addObject("media","la media è:"+ studenteService.mediaVoti(studente));
 		
 		if (esamiService.checkEsame(esame, studente)) {
 			modelAndView.addObject("messaggio", "L'esame è già stato prenotato");
 		} else {
+			modelAndView.addObject("messaggioSucc", "L'esame è  stato prenotato");
+			
 			Risultato risultato = new Risultato(esame, studente);
 			risultatoService.save(risultato);
 			esame.getListaStudentiPrenotati().add(studente);
-			studente.getEsamiPrenotati().add(esame);
-			studenteService.save(studente);
 			esamiService.save(esame);
 		}
 		
