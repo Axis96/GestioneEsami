@@ -2,6 +2,7 @@ package it.dstech.model;
 
 import java.util.List;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Studente {
@@ -30,8 +30,8 @@ public class Studente {
     private Set<Ruolo> ruolo;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Esame> esamiPrenotati;
-	@OneToOne(cascade = CascadeType.ALL)
-	private Risultato risultato;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Risultato> listaRisultato;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Esame> esamiPassati;

@@ -103,8 +103,6 @@ public class RegistrazioneController {
 		}	
 		Studente studente = studenteService.findUserByUsername(auth.getName());
 		modelAndView.addObject("media","la media è:"+ studenteService.mediaVoti(studente));
-
-
 		modelAndView.addObject("idStudente", studente.getMatricola());
 		modelAndView.addObject("username", "Welcome " + studente.getUsername());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");

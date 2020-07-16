@@ -55,17 +55,44 @@ public class StudenteController {
 		return modelAndView;
 	}
 	
-	@PostMapping(value= {"/studente/esamiPssati"})
-	public ModelAndView esamiPassati(@RequestParam("idEsame")Long idEsame, @RequestParam("idStudente") Long idStudente) {
+//	@PostMapping(value= {"/studente/esamiPssati"})
+//	public ModelAndView esamiPassati(@RequestParam("idEsame")Long idEsame, @RequestParam("idStudente") Long idStudente) {
+//		ModelAndView modelAndView = new ModelAndView();
+//		Studente studente = studenteService.get(idStudente);
+//			
+//		List<Esame> listaEsamiPassati= studenteService.getListaEsamiPassati(studente);
+//	
+//		
+//		modelAndView.addObject("idStudente", studente.getMatricola());
+//		modelAndView.addObject("listaEsami", esamiService.listaEsami());
+//		modelAndView.setViewName("studente/home");
+//		return modelAndView;
+//	}
+	
+	@PostMapping(value= {"/studente/esamiPassati"})
+	public ModelAndView esamiPassati(@RequestParam("idStudente") Long idStudente) {
 		ModelAndView modelAndView = new ModelAndView();
 		Studente studente = studenteService.get(idStudente);
-			
-		List<Esame> listaEsamiPassati= studenteService.getListaEsamiPassati(studente);
-	
-		
 		modelAndView.addObject("idStudente", studente.getMatricola());
-		modelAndView.addObject("listaEsami", esamiService.listaEsami());
-		modelAndView.setViewName("studente/home");
+		modelAndView.addObject("username", "Welcome " + studente.getUsername());
+		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+		modelAndView.addObject("listaEsami", risultatoService.sortVotoDesc(idStudente));
+		modelAndView.setViewName("studente/esamiPassati");
+		return modelAndView;
+	}
+	@PostMapping(value= {"/studente/ordina"})
+	public ModelAndView ordinaEsame(@RequestParam("idStudente") Long idStudente, int scelta) {
+		ModelAndView modelAndView = new ModelAndView();
+		Studente studente = studenteService.get(idStudente);
+		if(scelta == 1) {
+			modelAndView.addObject("listaEsami", risultatoService.sortVotoDesc(idStudente));
+		}else {
+			modelAndView.addObject("listaEsami", risultatoService.sortVotoAsc(idStudente));
+		}
+		modelAndView.addObject("idStudente", studente.getMatricola());
+		modelAndView.addObject("username", "Welcome " + studente.getUsername());
+		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+		modelAndView.setViewName("studente/esamiPassati");
 		return modelAndView;
 	}
 }

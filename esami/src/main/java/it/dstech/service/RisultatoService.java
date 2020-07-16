@@ -46,4 +46,11 @@ public class RisultatoService {
 	public Risultato get(Long id) {
 		return risultatoRepository.findById(id).get();
 	}
+	
+	public List<Risultato> sortVotoDesc(Long idStudente) {
+		return risultatoRepository.sortVotoAsc(idStudente);
+	}
+	public List<Risultato> sortVotoAsc(Long idStudente) {
+		return risultatoRepository.sortVotoDesc(idStudente);
+	}
 }

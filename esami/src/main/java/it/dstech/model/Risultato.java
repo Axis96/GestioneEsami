@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Risultato {
@@ -19,7 +18,7 @@ public class Risultato {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Esame esame;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Studente studente;
 	
 	private int voto;
@@ -74,6 +73,13 @@ public class Risultato {
 		return studente.getUsername();
 	}
 
+	@Override
+	public String toString() {
+		return "Risultato [id=" + id + ", esame=" + esame + ", studente=" + studente + ", voto=" + voto
+				+ ", nomeStudente=" + nomeStudente + ", matricolaStudente=" + matricolaStudente + "]";
+	}
+
+	
 	
 	
 }
