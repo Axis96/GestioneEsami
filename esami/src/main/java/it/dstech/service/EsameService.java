@@ -15,6 +15,9 @@ public class EsameService {
 
 	@Autowired
 	private EsameRepository esameRepository;
+	
+	@Autowired
+	private StudenteService studenteService;
 
 	public void save(Esame esame) {
 		esameRepository.save(esame);
@@ -39,8 +42,8 @@ public class EsameService {
 	}
 	
 	public boolean checkEsame(Esame esameDaControllare, Studente studente) {
-		for (Studente studentePrenotato : esameDaControllare.getListaStudentiPrenotati()) {
-			if (studentePrenotato == studente) {
+		for (Studente studentePrenotato : esameDaControllare.getListaStudentiPrenotati() /* || studenteservice.controlloSessione(Esame esameDaControllare, Studente studente) */) {
+			if (studentePrenotato == studente ) {
 				return true;
 			}
 		}

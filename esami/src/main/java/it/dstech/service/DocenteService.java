@@ -13,6 +13,7 @@ import it.dstech.model.Docente;
 import it.dstech.model.Esame;
 import it.dstech.model.Ruolo;
 import it.dstech.repository.DocenteRepository;
+import it.dstech.repository.EsameRepository;
 import it.dstech.repository.RuoloRepository;
 
 @Service
@@ -20,6 +21,7 @@ import it.dstech.repository.RuoloRepository;
 public class DocenteService {
 	
 	private DocenteRepository docenteRepository;
+	private EsameRepository esameRepository;
 	private RuoloRepository ruoloRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
@@ -55,4 +57,5 @@ public class DocenteService {
 	public Docente findUserByUsername(String username) {
 		return docenteRepository.findByUsername(username);
 	}
+
 }

@@ -50,6 +50,7 @@ public class RisultatoService {
 	public List<Risultato> sortVotoDesc(Long idStudente) {
 		return risultatoRepository.sortVotoAsc(idStudente);
 	}
+	
 	public List<Risultato> sortVotoAsc(Long idStudente) {
 		return risultatoRepository.sortVotoDesc(idStudente);
 	}

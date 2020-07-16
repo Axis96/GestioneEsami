@@ -45,9 +45,27 @@ public class Esame {
 	
 	private String nomeDocente;
 	
-	
+	private int sessione =1;
 
 	
+
+	public int getSessione() {
+		return sessione;
+	}
+
+
+
+	public void setSessione(int sessione) {
+		this.sessione = sessione;
+	}
+
+
+
+	public void setNomeDocente(String nomeDocente) {
+		this.nomeDocente = nomeDocente;
+	}
+
+
 
 	public String getNomeDocente() {
 		return docente.getUsername();

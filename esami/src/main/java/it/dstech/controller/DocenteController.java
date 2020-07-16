@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import it.dstech.model.Docente;
 import it.dstech.model.Esame;
 import it.dstech.model.Risultato;
+import it.dstech.repository.EsameRepository;
 import it.dstech.service.DocenteService;
 import it.dstech.service.EsameService;
 import it.dstech.service.StudenteService;
@@ -30,6 +31,8 @@ public class DocenteController {
 
 	@Autowired
 	private EsameService esamiService;
+	
+
 
 	@GetMapping(value = { "/docente/dettagli" })
 	public ModelAndView dettagli(Long idEsame,@RequestParam("matricola") Long matricola) {
@@ -63,8 +66,16 @@ public class DocenteController {
 		Docente docente = docenteService.get(matricola);
 		Esame esameDocente = new Esame();
 		
-		esamiService.save(esameDocente);
+
 		esameDocente.setNome(esame.getNome());
+		
+
+		for (Esame esamePassato : docente.getListaEsami()) {
+			if (esameDocente.getNome().equalsIgnoreCase(esamePassato.getNome())) {
+				esameDocente.setSessione(esameDocente.getSessione() +1);
+			}
+		}
+		
 		esameDocente.setData(esamiService.reversedDateFormat(esame));
 		esameDocente.setDocente(docente);
 		docente.getListaEsami().add(esameDocente);

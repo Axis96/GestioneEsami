@@ -27,6 +27,13 @@ public class Risultato {
 	
 	private Long matricolaStudente;
 	
+	private boolean bocciato;
+	
+	private int sessioneSostenuta;
+	
+
+	
+
 	public Risultato () {
 		
 	}
@@ -67,7 +74,25 @@ public class Risultato {
 		return studente.getMatricola();
 	}
 
+	public boolean isBocciato() {
+		if (this.voto <18 && this.voto >0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
+	public int getSessioneSostenuta() {
+		return sessioneSostenuta;
+	}
+
+	public void setSessioneSostenuta(int sessioneSostenuta) {
+		this.sessioneSostenuta = sessioneSostenuta;
+	}
+
+	public void setBocciato(boolean bocciato) {
+		this.bocciato = bocciato;
+	}
 
 	public String getNomeStudente() {
 		return studente.getUsername();

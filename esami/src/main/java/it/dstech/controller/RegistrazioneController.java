@@ -72,7 +72,7 @@ public class RegistrazioneController {
 		ModelAndView modelAndView = new ModelAndView();
 		Studente userExists = studenteService.findUserByUsername(studente.getUsername());
 		if (userExists != null) {
-			bindingResult.rejectValue("username", "error.user", "Utente gia registrato");
+			bindingResult.rejectValue("username", "error.user", "Utente già registrato");
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registrazione");
@@ -102,7 +102,13 @@ public class RegistrazioneController {
 			return modelAndView;
 		}	
 		Studente studente = studenteService.findUserByUsername(auth.getName());
-		modelAndView.addObject("media","la media è:"+ studenteService.mediaVoti(studente));
+		
+		if (studenteService.mediaVoti(studente) >0 ) {
+			modelAndView.addObject("media","La tua media è: "+ studenteService.mediaVoti(studente));
+		} else {
+			modelAndView.addObject("media","");
+		}
+		
 		modelAndView.addObject("idStudente", studente.getMatricola());
 		modelAndView.addObject("username", "Welcome " + studente.getUsername());
 		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");

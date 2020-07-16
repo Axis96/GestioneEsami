@@ -35,7 +35,6 @@
 				<td th:text="${esame.nome}"></td>
 				<td th:text="${esame.data}"></td>
 				<td th:text="${esame.nomeDocente}"></td>
-<!-- 				<td th:text="${esame.docente.nome}"></td> -->
 				<td><form action="#" th:action="@{/studente/prenota}" method="post" class="col-lg-6 offset-lg-3 ">
 					<input type="hidden" th:value="${esame.id}" name="idEsame" />
 					<input type="hidden" th:value="${idStudente}" name="idStudente" />

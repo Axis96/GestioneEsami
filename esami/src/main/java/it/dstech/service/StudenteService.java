@@ -1,16 +1,13 @@
 package it.dstech.service;
 
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import it.dstech.repository.RuoloRepository;
 import it.dstech.model.Esame;
 import it.dstech.model.Risultato;
@@ -67,9 +64,9 @@ public class StudenteService {
 		double cont=0;
 			for(Esame esame :studente.getEsamiPrenotati()) {
 				for(Risultato risultato :esame.getListaRisultati()) {
-					if(risultato.getStudente().getMatricola()==studente.getMatricola()) {
-				tot+=(double)risultato.getVoto();	
-					cont++;
+					if(risultato.getStudente().getMatricola()==studente.getMatricola() && risultato.getVoto() >= 18) {
+						tot+=(double)risultato.getVoto();	
+						cont++;
 					}
 				}
 			}
@@ -77,22 +74,24 @@ public class StudenteService {
 	}
 
 
-	public List<Esame> getListaEsamiPassati(Studente studente) {
+	public boolean controlloSessione(Esame esame, Studente studente) {
 		
-		List<Esame> listaEsamiPrenotati = studente.getEsamiPrenotati();
-		List<Esame> listaEsamiPassati = new ArrayList<Esame>();
-		HashMap<Esame, Integer> listaEsamiPassatiConVoto= new HashMap<Esame, Integer>();
+		int sessionePassata =0;
 		
-		for (Esame esame : listaEsamiPrenotati) {
-			for (Risultato risultato : esame.getListaRisultati()) {
-				if(studente == risultato.getStudente() && risultato.getVoto() != 0) {
-					
-					listaEsamiPassatiConVoto.put(esame, risultato.getVoto());
-					
+		for (Esame esamePassato : studente.getEsamiPrenotati()) {
+			if (esamePassato.getNome().equalsIgnoreCase(esame.getNome())) {
+				for (Risultato risultatoPassato : esamePassato.getListaRisultati()) {
+					if(risultatoPassato.isBocciato()) {
+						sessionePassata = risultatoPassato.getSessioneSostenuta();
+					}
 				}
 			}
 		}
-		return listaEsamiPassati;
-	}
+		
+		if ((esame.getSessione() - sessionePassata) <2 && sessionePassata != 0) {
+			return true;
+		}
+		return false;
+	}	
 
 }
