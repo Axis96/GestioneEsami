@@ -32,8 +32,8 @@
 	<td>
 				 <form  action="#" th:action="@{/docente/inserisciVoto}"  method="post">
 				 <input type="hidden" th:value="${idEsame}" name="idEsame" />
-    <input type="hidden" th:value="${matricola}" name="matricola" />
-        <input type="hidden" th:value="${risultato.matricolaStudente}" name="matricolaStud" />
+                 <input type="hidden" th:value="${matricola}" name="matricola" />
+                 <input type="hidden" th:value="${risultato.id}" name="risultatoId" />
     
     <span th:if="${risultato.voto == 0}"><input type="number" name="voto"  min ="1" max="30">
    <input type="submit" value="Inserisci voto" >

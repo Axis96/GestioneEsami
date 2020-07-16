@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.dstech.model.Docente;
 import it.dstech.model.Esame;
 import it.dstech.model.Risultato;
 import it.dstech.model.Studente;
@@ -15,12 +16,6 @@ import it.dstech.repository.RisultatoRepository;
 @Service
 @Transactional
 public class RisultatoService {
-
-	@Autowired
-	private EsameService esameService;
-	
-	@Autowired
-	private StudenteService studenteService;
 
 	@Autowired
 	private RisultatoRepository risultatoRepository;
@@ -38,5 +33,17 @@ public class RisultatoService {
 	
 	public void save(Risultato risultato) {
 		risultatoRepository.save(risultato);
+	}
+	
+	public List<Risultato> listaRisultati() {
+		return (List<Risultato>) risultatoRepository.findAll();
+	}
+
+	public List<Risultato> listaRisultatiEsame(Esame esame) {
+		return (List<Risultato>) risultatoRepository.findByEsame(esame);
+	}
+	
+	public Risultato get(Long id) {
+		return risultatoRepository.findById(id).get();
 	}
 }

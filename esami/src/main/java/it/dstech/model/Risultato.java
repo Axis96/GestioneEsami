@@ -14,7 +14,7 @@ public class Risultato {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name = "esame_id")
+	@Column(name = "risultato_id")
 	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)

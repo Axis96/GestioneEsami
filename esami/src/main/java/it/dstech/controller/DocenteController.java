@@ -35,22 +35,21 @@ public class DocenteController {
 	@GetMapping(value = { "/docente/dettagli" })
 	public ModelAndView dettagli(Long idEsame,@RequestParam("matricola") Long matricola) {
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+matricola);
 		Esame esame = esamiService.get(idEsame);
+		List<Risultato> listaRisultato= risultatoService.listaRisultatiEsame(esame);
+		
+		System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+matricola);
 		modelAndView.addObject("risultato", new Risultato());
 		modelAndView.addObject("idEsame", idEsame);
 		modelAndView.addObject("matricola", matricola);
-		modelAndView.addObject("listaRisultati", risultatoService.getListaRisultati(esame));
+		modelAndView.addObject("listaRisultati" , listaRisultato);
 		modelAndView.setViewName("docente/dettagli");
 		return modelAndView;
 	}
 
 	@PostMapping(value = { "/docente/inserisciVoto" })
-	public ModelAndView inserisciRisultato(Long idEsame, Long matricola, int voto, Long matricolaStud) {
-		System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+matricola);
-		Risultato risultato = new Risultato();
-		risultato.setEsame(esamiService.get(idEsame));
-		risultato.setStudente(studenteService.get(matricolaStud));
+	public ModelAndView inserisciRisultato(Long idEsame, Long matricola, int voto, Long risultatoId) {
+		Risultato risultato = risultatoService.get(risultatoId);	
 		risultato.setVoto(voto);
 		risultatoService.save(risultato);
 		
