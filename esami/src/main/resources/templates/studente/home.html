@@ -45,8 +45,13 @@
 		</tbody>
 	</table>
 	
+	<form th:action="@{/studente/esamiPassati}" method="get">
+        <button class="btn btn-md btn-danger" name="esamiPassati" type="Submit"> Esami Passati </button>
+    </form>
+	
+	
 	 <form th:action="@{/logout}" method="get">
-        <button class="btn btn-md btn-danger" name="registration" type="Submit"> Logout </button>
+        <button class="btn btn-md btn-danger" name="logout" type="Submit"> Logout </button>
     </form>
 	 
 </body>

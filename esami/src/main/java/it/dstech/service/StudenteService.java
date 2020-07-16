@@ -1,7 +1,9 @@
 package it.dstech.service;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -57,18 +59,40 @@ public class StudenteService {
 		return studenteRepository.findByUsername(username);
 	}
 	
+	
+	
+	
 	public double mediaVoti(Studente studente) {
-	double tot=0;
-	double cont=0;
-		for(Esame esame :studente.getEsamiPrenotati()) {
-			for(Risultato risultato :esame.getListaRisultati()) {
-				if(risultato.getStudente().getMatricola()==studente.getMatricola()) {
-			tot+=(double)risultato.getVoto();	
-			System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+risultato.getVoto());
-				cont++;
+		double tot=0;
+		double cont=0;
+			for(Esame esame :studente.getEsamiPrenotati()) {
+				for(Risultato risultato :esame.getListaRisultati()) {
+					if(risultato.getStudente().getMatricola()==studente.getMatricola()) {
+				tot+=(double)risultato.getVoto();	
+					cont++;
+					}
+				}
+			}
+		return	 tot/cont;
+	}
+
+
+	public List<Esame> getListaEsamiPassati(Studente studente) {
+		
+		List<Esame> listaEsamiPrenotati = studente.getEsamiPrenotati();
+		List<Esame> listaEsamiPassati = new ArrayList<Esame>();
+		HashMap<Esame, Integer> listaEsamiPassatiConVoto= new HashMap<Esame, Integer>();
+		
+		for (Esame esame : listaEsamiPrenotati) {
+			for (Risultato risultato : esame.getListaRisultati()) {
+				if(studente == risultato.getStudente() && risultato.getVoto() != 0) {
+					
+					listaEsamiPassatiConVoto.put(esame, risultato.getVoto());
+					
 				}
 			}
 		}
-	return	 tot/cont;
+		return listaEsamiPassati;
 	}
+
 }

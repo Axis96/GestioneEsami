@@ -1,7 +1,7 @@
 package it.dstech.controller;
 
 
-import java.util.ArrayList;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import it.dstech.model.Docente;
 import it.dstech.model.Esame;
 import it.dstech.model.Risultato;
-import it.dstech.model.Studente;
 import it.dstech.service.DocenteService;
 import it.dstech.service.EsameService;
 import it.dstech.service.StudenteService;
@@ -38,7 +37,7 @@ public class DocenteController {
 		Esame esame = esamiService.get(idEsame);
 		List<Risultato> listaRisultato= risultatoService.listaRisultatiEsame(esame);
 		
-		System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+matricola);
+
 		modelAndView.addObject("risultato", new Risultato());
 		modelAndView.addObject("idEsame", idEsame);
 		modelAndView.addObject("matricola", matricola);
