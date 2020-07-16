@@ -28,12 +28,15 @@ public class StudenteService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public Studente save(Studente studente) {
+		Studente studente2 = studenteRepository.findByUsername(studente.getUsername());
+		
+		if(studente2==null) {
 	        studente.setPassword(bCryptPasswordEncoder.encode(studente.getPassword()));
 	        studente.setActive(true);
 	       
 	        Ruolo userRole = ruoloRepository.findByRuolo("STUDENTE");
 	        studente.setRuolo(new HashSet<Ruolo>(Arrays.asList(userRole)));
-	        
+		}
 	        return studenteRepository.save(studente);
 	    }
 	
@@ -59,9 +62,11 @@ public class StudenteService {
 	double cont=0;
 		for(Esame esame :studente.getEsamiPrenotati()) {
 			for(Risultato risultato :esame.getListaRisultati()) {
+				if(risultato.getStudente().getMatricola()==studente.getMatricola()) {
 			tot+=(double)risultato.getVoto();	
 			System.out.println("\\\\\\\\\\\\\\\\\\\\\\\\\\\\"+risultato.getVoto());
 				cont++;
+				}
 			}
 		}
 	return	 tot/cont;

@@ -39,7 +39,10 @@ public class StudenteController {
 			
 			Risultato risultato = new Risultato(esame, studente);
 			risultatoService.save(risultato);
+			esame.getListaRisultati().add(risultato);
 			esame.getListaStudentiPrenotati().add(studente);
+			studente.getEsamiPrenotati().add(esame);
+			studenteService.save(studente);
 			esamiService.save(esame);
 		}
 		
